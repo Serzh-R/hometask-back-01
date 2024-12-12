@@ -12,7 +12,7 @@ import {errorResponse} from '../validation/errorResponse';
 import {HTTP_STATUSES} from '../settings';
 
 
-export const videoRouter: Router = Router()
+export const videoRouter = Router({})
 
 export const videoController = {
     getVideo (req: Request, res: Response) {

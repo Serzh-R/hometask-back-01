@@ -9,5 +9,5 @@ app.use(cors())
 app.use(SETTINGS.PATH.VIDEOS, videoRouter)
 
 app.get('/', (req: Request, res: Response) => {
-    res.status(HTTP_STATUSES.OK_200).json({version: '2.0'})
+    res.status(HTTP_STATUSES.OK_200).json('Hello Back-end!')
 })
