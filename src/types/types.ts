@@ -48,15 +48,3 @@ export type VideoTypes = {
     publicationDate?: string
     availableResolutions?: ResolutionsEnam[] | null
 }
-
-// Значения по умолчанию
-export const defaultVideo: VideoTypes = {
-    id: 1,
-    title: "Пример видео",
-    author: "Автор",
-    canBeDownloaded: false,
-    minAgeRestriction: null,
-    createdAt: new Date().toISOString(),
-    publicationDate: new Date(Date.now() + 86400000).toISOString(), // +1 день от текущей даты
-    availableResolutions: null,
-}

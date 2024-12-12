@@ -1,17 +1,18 @@
-import {DBType} from '../types/types';
+import {DBType, VideoTypes} from '../types/types';
 
+export const video: VideoTypes = {
+    id: 1,
+    title: 'back',
+    author: 'serzh',
+    canBeDownloaded: false,
+    minAgeRestriction: null,
+    createdAt: new Date().toISOString(),
+    publicationDate: new Date(Date.now() + 86400000).toISOString(),
+    availableResolutions: null,
+}
 
 export const db: DBType = {
-    videos: [{
-        id: 1,
-        title: 'back',
-        author: 'serzh',
-        canBeDownloaded: false,
-        minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date(Date.now() + 86400000).toISOString(),
-        availableResolutions: null,
-    }]
+    videos: []
 }
 
 // функция для быстрой очистки/заполнения базы данных для тестов
