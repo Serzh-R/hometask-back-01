@@ -10,7 +10,7 @@ import {
 } from '../validation/fieldValidator';
 import {errorResponse} from '../validation/errorResponse';
 import {HTTP_STATUSES} from '../settings';
-import {CreateVideoInputModel} from '../types/types';
+import {CreateVideoInputModel, UpdateVideoInputModel} from '../types/types';
 
 
 export const videoRouter = Router({})
@@ -24,7 +24,7 @@ export const videoController = {
     createVideo (req: Request, res: Response) {
 
         const body: CreateVideoInputModel = req.body;
-        const { title, author, availableResolutions } = body;
+        const { title, author, availableResolutions } = body
 
         const errorsArray: Array<{field: string, message: string}> = []
         titleFieldValidator(title, errorsArray)
@@ -85,7 +85,8 @@ export const videoController = {
             return;
         }
 
-        const { title, author, availableResolutions, canBeDownloaded, minAgeRestriction, publicationDate } = req.body;
+        const body: UpdateVideoInputModel = req.body;
+        const { title, author, availableResolutions, canBeDownloaded, minAgeRestriction, publicationDate } = body
 
         const errorsArray: Array<{ field: string; message: string }> = [];
         titleFieldValidator(title, errorsArray);
@@ -111,7 +112,7 @@ export const videoController = {
             publicationDate,
         };
 
-        db.videos[videoIndex] = updatedVideo;
+        db.videos[videoIndex] = updatedVideo
 
         res.status(HTTP_STATUSES.NO_CONTENT_204).send()
     },
