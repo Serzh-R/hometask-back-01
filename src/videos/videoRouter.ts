@@ -10,6 +10,7 @@ import {
 } from '../validation/fieldValidator';
 import {errorResponse} from '../validation/errorResponse';
 import {HTTP_STATUSES} from '../settings';
+import {CreateVideoInputModel} from '../types/types';
 
 
 export const videoRouter = Router({})
@@ -21,9 +22,9 @@ export const videoController = {
     },
 
     createVideo (req: Request, res: Response) {
-        const title = req.body.title
-        const author = req.body.author
-        const availableResolutions = req.body.availableResolutions
+
+        const body: CreateVideoInputModel = req.body;
+        const { title, author, availableResolutions } = body;
 
         const errorsArray: Array<{field: string, message: string}> = []
         titleFieldValidator(title, errorsArray)
@@ -37,9 +38,14 @@ export const videoController = {
         }
 
         const video = {
-            ...req.body,
             id: Date.now() + Math.random(),
-            title: title,
+            title,
+            author,
+            canBeDownloaded: false,
+            minAgeRestriction: null,
+            createdAt: new Date().toISOString(),
+            publicationDate: new Date(Date.now() + 86400000).toISOString(),
+            availableResolutions,
         }
 
         db.videos = [...db.videos, video]
@@ -120,9 +126,9 @@ export const videoController = {
             return;
         }
 
-        db.videos.splice(videoIndex, 1); // Удаляем видео из базы
+        db.videos.splice(videoIndex, 1)
 
-        res.status(HTTP_STATUSES.NO_CONTENT_204).send(); // No Content
+        res.status(HTTP_STATUSES.NO_CONTENT_204).send()
     },
 
 }
@@ -132,3 +138,6 @@ videoRouter.post('/', videoController.createVideo)
 videoRouter.get('/:id', videoController.getVideoById)
 videoRouter.put('/:id', videoController.updateVideo)
 videoRouter.delete('/:id', videoController.deleteVideo)
+
+
+
