@@ -1,7 +1,7 @@
 import {DBType, VideoTypes} from '../types/types';
 
 export const video: VideoTypes = {
-    id: 1,
+    id: Date.now() + Math.random(),
     title: 'back',
     author: 'serzh',
     canBeDownloaded: false,

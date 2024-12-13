@@ -1,5 +1,5 @@
 import {Router, Request, Response} from 'express';
-import {db} from '../db/db';
+import {db, video} from '../db/db';
 import {
     authorFieldValidator,
     availableResolutionsFieldValidator,
@@ -44,19 +44,14 @@ export const videoController = {
             res.status(HTTP_STATUSES.BAD_REQUEST_400).json(errors_)
             return
         }
-
-        const video = {
-            id: Date.now() + Math.random(),
+        const newVideo = {
+            ...video,
             title,
             author,
-            canBeDownloaded: true,
-            minAgeRestriction: null,
-            createdAt: new Date().toISOString(),
-            publicationDate: new Date(Date.now() + 86400000).toISOString(),
-            availableResolutions,
+            availableResolutions
         }
 
-        db.videos = [...db.videos, video]
+        db.videos = [...db.videos, newVideo]
         res.status(HTTP_STATUSES.CREATED_201).json(video)
     },
 
