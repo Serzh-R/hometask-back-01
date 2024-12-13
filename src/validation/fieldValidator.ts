@@ -1,61 +1,49 @@
 import {ResolutionsEnam} from '../types/types'
 
-export const titleFieldValidator
-    = (
-    title: string | undefined,
-    errorsArray: Array<{message: string, field: string}>
+export const titleFieldValidator = (
+    title: string | undefined | null,
+    errorsArray: Array<{ message: string; field: string }>
 ) => {
-
-    if (!title) {
+    // Проверка на null, undefined или пустую строку
+    if (!title || title.trim().length < 1) {
         errorsArray.push({
             message: 'no title',
-            field: 'title'
+            field: 'title',
         });
-        return
+        return;
     }
 
-    if (title && title.trim().length > 40) {
+    // Проверка на максимальную длину
+    if (title.trim().length > 40) {
         errorsArray.push({
             message: 'more than 40 symbols',
-            field: 'title'
-        });
-        return
+            field: 'title',
+        })
+        return;
     }
-    if (title && title.trim().length < 1) {
-        errorsArray.push({
-            message: 'no title',
-            field: 'title'
-        });
-        return
-    }
-}
+};
+
 
 export const authorFieldValidator = (
-    author: string | undefined,
-    errorsArray: Array<{message: string, field: string}>
+    author: string | undefined | null,
+    errorsArray: Array<{ message: string; field: string }>
 ) => {
-    if (!author) {
+    // Проверка на null, undefined или пустую строку
+    if (!author || author.trim().length < 1) {
         errorsArray.push({
             message: 'no author',
-            field: 'author'
+            field: 'author',
         });
-        return
+        return;
     }
 
-    if (author && author.trim().length > 20) {
+    // Проверка на максимальную длину
+    if (author.trim().length > 20) {
         errorsArray.push({
             message: 'more than 20 symbols',
-            field: 'author'
-        });
-        return
-    }
-
-    if (author && author.trim().length < 1) {
-        errorsArray.push({
-            message: 'no author',
-            field: 'author'
-        });
-        return
+            field: 'author',
+        })
+        return;
     }
 };
 
@@ -77,15 +65,23 @@ export const availableResolutionsFieldValidator = (
 }
 
 export const canBeDownloadedFieldValidator = (
-    canBeDownloaded: boolean | undefined,
-    errorsArray: Array<{message: string, field: string}>
+    canBeDownloaded: boolean | undefined | null,
+    errorsArray: Array<{ message: string; field: string }>
 ) => {
+    if (canBeDownloaded === undefined || canBeDownloaded === null) {
+        errorsArray.push({
+            message: 'must be a boolean value',
+            field: 'canBeDownloaded',
+        });
+        return;
+    }
+
     if (typeof canBeDownloaded !== 'boolean') {
         errorsArray.push({
             message: 'must be a boolean value',
-            field: 'canBeDownloaded'
+            field: 'canBeDownloaded',
         })
-        return
+        return;
     }
 };
 

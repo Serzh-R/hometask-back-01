@@ -34,7 +34,7 @@ export const videoController = {
         const body: CreateVideoInputModel = req.body;
         const { title, author, availableResolutions } = body
 
-        const errorsArray: Array<{field: string, message: string}> = []
+        const errorsArray: Array<{message: string, field: string}> = []
         titleFieldValidator(title, errorsArray)
         authorFieldValidator(author, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
