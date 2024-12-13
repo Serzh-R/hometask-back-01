@@ -16,6 +16,13 @@ import {CreateVideoInputModel, UpdateVideoInputModel} from '../types/types';
 export const videoRouter = Router({})
 
 export const videoController = {
+
+    deleteAllVideos(req: Request, res: Response) {
+        db.videos = []
+
+        res.status(HTTP_STATUSES.NO_CONTENT_204).send();
+    },
+
     getVideo (req: Request, res: Response) {
         const videos = db.videos
         res.status(HTTP_STATUSES.OK_200).json(videos)
@@ -134,6 +141,7 @@ export const videoController = {
 
 }
 
+videoRouter.delete('/', videoController.deleteAllVideos)
 videoRouter.get('/', videoController.getVideo)
 videoRouter.post('/', videoController.createVideo)
 videoRouter.get('/:id', videoController.getVideoById)
