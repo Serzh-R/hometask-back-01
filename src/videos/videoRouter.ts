@@ -61,7 +61,8 @@ export const videoController = {
     },
 
     getVideoById(req: Request, res: Response) {
-        const id = parseInt(req.params.id, 10);
+
+        const id = +req.params.id
 
         if (isNaN(id)) {
             res.status(HTTP_STATUSES.BAD_REQUEST_400).json({ message: 'Invalid video ID' });
@@ -71,15 +72,16 @@ export const videoController = {
         const video = db.videos.find((video) => video.id === id);
 
         if (!video) {
-            res.status(HTTP_STATUSES.NOT_FOUND_404).json({ message: 'Video not found' });
+            res.status(HTTP_STATUSES.NOT_FOUND_404).send()
             return;
         }
 
-        res.status(HTTP_STATUSES.OK_200).json(video);
+        res.status(HTTP_STATUSES.OK_200).json(video)
     },
 
     updateVideo(req: Request, res: Response) {
-        const id = parseInt(req.params.id, 10);
+
+        const id = +req.params.id
 
         if (isNaN(id)) {
             res.status(HTTP_STATUSES.BAD_REQUEST_400).json({ message: 'Invalid video ID' });
@@ -89,7 +91,7 @@ export const videoController = {
         const videoIndex = db.videos.findIndex((video) => video.id === id);
 
         if (videoIndex === -1) {
-            res.status(HTTP_STATUSES.NOT_FOUND_404).json({ message: 'Video not found' });
+            res.status(HTTP_STATUSES.NOT_FOUND_404).send()
             return;
         }
 
@@ -106,7 +108,7 @@ export const videoController = {
 
         if (errorsArray.length > 0) {
             const errors_ = errorResponse(errorsArray);
-            res.status(400).json(errors_);
+            res.status(HTTP_STATUSES.BAD_REQUEST_400).json(errors_);
             return;
         }
 
@@ -126,16 +128,17 @@ export const videoController = {
     },
 
     deleteVideo(req: Request, res: Response) {
-        const { id } = req.params;
 
-        const videoIndex = db.videos.findIndex((video) => video.id === +id);
+        const id = +req.params.id;
 
-        if (videoIndex === -1) {
-            res.status(HTTP_STATUSES.NOT_FOUND_404).json({ message: 'Video not found' });
-            return;
+        const videoExists = db.videos.some((video) => video.id === id);
+
+        if (!videoExists) {
+            res.status(HTTP_STATUSES.NOT_FOUND_404).json({ message: 'Video not found' })
+            return
         }
 
-        db.videos.splice(videoIndex, 1)
+        db.videos = db.videos.filter((video) => video.id !== id)
 
         res.status(HTTP_STATUSES.NO_CONTENT_204).send()
     },
