@@ -60,7 +60,7 @@ export const authorFieldValidator = (
 };
 
 export const availableResolutionsFieldValidator = (
-    availableResolutions: ResolutionsEnam[] | null,
+    availableResolutions: ResolutionsEnam[] | undefined,
     errorsArray: Array<{ message: string; field: string }>
 ) => {
     if (availableResolutions && availableResolutions.length) {

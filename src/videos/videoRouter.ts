@@ -49,7 +49,7 @@ export const videoController = {
             id: Date.now() + Math.random(),
             title,
             author,
-            canBeDownloaded: false,
+            canBeDownloaded: true,
             minAgeRestriction: null,
             createdAt: new Date().toISOString(),
             publicationDate: new Date(Date.now() + 86400000).toISOString(),
