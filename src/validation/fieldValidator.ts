@@ -1,67 +1,74 @@
-import {ResolutionsEnam} from '../types/types';
+import {ResolutionsEnam} from '../types/types'
 
-export const titleFieldValidator = (
+export const titleFieldValidator
+    = (
     title: string | undefined,
-    errorsArray: Array<{field: string, message: string}>
+    errorsArray: Array<{message: string, field: string}>
 ) => {
 
     if (!title) {
         errorsArray.push({
-            field: 'title',
-            message: 'no title'
+            message: 'no title',
+            field: 'title'
         });
+        return
     }
 
     if (title && title.trim().length > 40) {
         errorsArray.push({
-            field: 'title',
-            message: 'more than 40 symbols'
+            message: 'more than 40 symbols',
+            field: 'title'
         });
+        return
     }
     if (title && title.trim().length < 1) {
         errorsArray.push({
-            field: 'title',
-            message: 'no title'
+            message: 'no title',
+            field: 'title'
         });
+        return
     }
 }
 
 export const authorFieldValidator = (
     author: string | undefined,
-    errorsArray: Array<{ field: string, message: string }>
+    errorsArray: Array<{message: string, field: string}>
 ) => {
     if (!author) {
         errorsArray.push({
-            field: 'author',
-            message: 'no author'
+            message: 'no author',
+            field: 'author'
         });
+        return
     }
 
     if (author && author.trim().length > 20) {
         errorsArray.push({
-            field: 'author',
-            message: 'more than 20 symbols'
+            message: 'more than 20 symbols',
+            field: 'author'
         });
+        return
     }
 
     if (author && author.trim().length < 1) {
         errorsArray.push({
-            field: 'author',
-            message: 'no author'
+            message: 'no author',
+            field: 'author'
         });
+        return
     }
 };
 
 export const availableResolutionsFieldValidator = (
     availableResolutions: ResolutionsEnam[] | null,
-    errorsArray: Array<{field: string, message: string}>
+    errorsArray: Array<{ message: string; field: string }>
 ) => {
     if (availableResolutions && availableResolutions.length) {
         availableResolutions.forEach((resolution: string) => {
             if (!Object.keys(ResolutionsEnam).includes(resolution)) {
                 errorsArray.push({
-                    field: 'availableResolutions',
-                    message: 'exist not valid value'
+                    message: 'exist not valid value',
+                    field: 'availableResolutions'
                 })
                 return
             }
@@ -71,53 +78,56 @@ export const availableResolutionsFieldValidator = (
 
 export const canBeDownloadedFieldValidator = (
     canBeDownloaded: boolean | undefined,
-    errorsArray: Array<{ field: string, message: string }>
+    errorsArray: Array<{message: string, field: string}>
 ) => {
     if (typeof canBeDownloaded !== 'boolean') {
         errorsArray.push({
-            field: 'canBeDownloaded',
-            message: 'must be a boolean value'
-        });
+            message: 'must be a boolean value',
+            field: 'canBeDownloaded'
+        })
+        return
     }
 };
 
 export const minAgeRestrictionFieldValidator = (
     minAgeRestriction: number | null | undefined,
-    errorsArray: Array<{ field: string, message: string }>
+    errorsArray: Array<{message: string, field: string}>
 ) => {
     if (minAgeRestriction !== null && typeof minAgeRestriction !== 'number') {
         errorsArray.push({
-            field: 'minAgeRestriction',
-            message: 'must be a number or null'
+            message: 'must be a number or null',
+            field: 'minAgeRestriction'
         });
         return;
     }
 
     if (minAgeRestriction !== null && (minAgeRestriction < 1 || minAgeRestriction > 18)) {
         errorsArray.push({
-            field: 'minAgeRestriction',
-            message: 'must be between 1 and 18 or null'
-        });
+            message: 'must be between 1 and 18 or null',
+            field: 'minAgeRestriction'
+        })
+        return
     }
 };
 
 export const publicationDateFieldValidator = (
     publicationDate: string | undefined,
-    errorsArray: Array<{ field: string, message: string }>
+    errorsArray: Array<{message: string, field: string}>
 ) => {
     if (!publicationDate) {
         errorsArray.push({
+            message: 'no publication date',
             field: 'publicationDate',
-            message: 'no publication date'
         });
-        return;
+        return
     }
 
     const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
     if (!isoDateRegex.test(publicationDate)) {
         errorsArray.push({
-            field: 'publicationDate',
-            message: 'must be in ISO 8601 format'
-        });
+            message: 'must be in ISO 8601 format',
+            field: 'publicationDate'
+        })
+        return
     }
 };
