@@ -46,5 +46,5 @@ export type VideoTypes = {
     minAgeRestriction?: number | null
     createdAt?: string
     publicationDate?: string
-    availableResolutions?: ResolutionsEnam[]
+    availableResolutions?: ResolutionsEnam[] | null
 }

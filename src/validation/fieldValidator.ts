@@ -48,9 +48,14 @@ export const authorFieldValidator = (
 };
 
 export const availableResolutionsFieldValidator = (
-    availableResolutions: ResolutionsEnam[] | undefined,
+    availableResolutions: ResolutionsEnam[] | null | undefined,
     errorsArray: Array<{ message: string; field: string }>
 ) => {
+
+    if (availableResolutions === null) {
+        return
+    }
+
     if (availableResolutions && availableResolutions.length) {
         availableResolutions.forEach((resolution: string) => {
             if (!Object.keys(ResolutionsEnam).includes(resolution)) {
