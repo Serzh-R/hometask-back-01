@@ -52,7 +52,7 @@ export const videoController = {
         }
 
         db.videos = [...db.videos, newVideo]
-        res.status(HTTP_STATUSES.CREATED_201).json(video)
+        res.status(HTTP_STATUSES.CREATED_201).json(newVideo)
     },
 
     getVideoById(req: Request, res: Response) {
@@ -64,14 +64,14 @@ export const videoController = {
             return;
         }
 
-        const video = db.videos.find((video) => video.id === id);
+        const videoById = db.videos.find((video) => video.id === id);
 
-        if (!video) {
+        if (!videoById) {
             res.status(HTTP_STATUSES.NOT_FOUND_404).send()
             return;
         }
 
-        res.status(HTTP_STATUSES.OK_200).json(video)
+        res.status(HTTP_STATUSES.OK_200).json(videoById)
     },
 
     updateVideo(req: Request, res: Response) {
