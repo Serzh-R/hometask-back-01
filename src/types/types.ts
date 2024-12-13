@@ -4,12 +4,12 @@ export type DBType = {
 }
 
 export type FieldError = {
-    message: string | null
-    field: string | null
+    message: string
+    field: string
 }
 
 export type APIErrorResult = {
-    errorsMessages: FieldError[] | null
+    errorsMessages: FieldError[]
 }
 
 export enum ResolutionsEnam {
