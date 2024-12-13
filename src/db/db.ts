@@ -6,8 +6,8 @@ export const video: VideoTypes = {
     author: 'serzh',
     canBeDownloaded: false,
     minAgeRestriction: null,
-    createdAt: new Date().toISOString(),
-    publicationDate: new Date(Date.now() + 86400000).toISOString(),
+    createdAt: new Date(Math.floor(Date.now() / 1000) * 1000).toISOString(),
+    publicationDate: new Date(Math.floor((Date.now() + 86400000) / 1000) * 1000).toISOString(),
     availableResolutions: null,
 }
 
