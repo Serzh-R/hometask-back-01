@@ -26,7 +26,7 @@ export enum ResolutionsEnam {
 export type CreateVideoInputModel = {
     title: string
     author: string
-    availableResolutions?: ResolutionsEnam[]
+    availableResolutions?: ResolutionsEnam[] | null
 };
 
 export type UpdateVideoInputModel = {
@@ -35,7 +35,7 @@ export type UpdateVideoInputModel = {
     canBeDownloaded?: boolean
     minAgeRestriction?: number | null
     publicationDate?: string
-    availableResolutions?: ResolutionsEnam[]
+    availableResolutions?: ResolutionsEnam[] | null
 };
 
 export type VideoTypes = {
