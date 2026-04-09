@@ -1,6 +1,6 @@
 
 export type DBType = {
-    videos: VideoTypes[]
+    videos: VideoType[]
 }
 
 export type FieldError = {
@@ -12,7 +12,7 @@ export type APIErrorResult = {
     errorsMessages: FieldError[]
 }
 
-export enum ResolutionsEnam {
+export enum ResolutionsEnum {
     P144 = "P144",
     P240 = "P240",
     P360 = "P360",
@@ -26,7 +26,7 @@ export enum ResolutionsEnam {
 export type CreateVideoInputModel = {
     title: string
     author: string
-    availableResolutions?: ResolutionsEnam[] | null
+    availableResolutions?: ResolutionsEnum[] | null
 };
 
 export type UpdateVideoInputModel = {
@@ -35,16 +35,16 @@ export type UpdateVideoInputModel = {
     canBeDownloaded?: boolean
     minAgeRestriction?: number | null
     publicationDate?: string
-    availableResolutions?: ResolutionsEnam[] | null
+    availableResolutions?: ResolutionsEnum[] | null
 };
 
-export type VideoTypes = {
-    id?: number
+export interface VideoType {
+    id: number
     title: string
     author: string
-    canBeDownloaded?: boolean
+    canBeDownloaded: boolean
     minAgeRestriction?: number | null
-    createdAt?: string
-    publicationDate?: string
-    availableResolutions?: ResolutionsEnam[] | null
+    createdAt: string
+    publicationDate: string
+    availableResolutions: ResolutionsEnum[] | null
 }

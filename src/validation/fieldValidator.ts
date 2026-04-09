@@ -1,4 +1,4 @@
-import {ResolutionsEnam} from '../types/types'
+import {ResolutionsEnum} from '../types/types'
 
 export const titleFieldValidator = (
     title: string | undefined | null,
@@ -48,7 +48,7 @@ export const authorFieldValidator = (
 };
 
 export const availableResolutionsFieldValidator = (
-    availableResolutions: ResolutionsEnam[] | null | undefined,
+    availableResolutions: ResolutionsEnum[] | null | undefined,
     errorsArray: Array<{ message: string; field: string }>
 ) => {
 
@@ -58,7 +58,7 @@ export const availableResolutionsFieldValidator = (
 
     if (availableResolutions && availableResolutions.length) {
         availableResolutions.forEach((resolution: string) => {
-            if (!Object.keys(ResolutionsEnam).includes(resolution)) {
+            if (!Object.keys(ResolutionsEnum).includes(resolution)) {
                 errorsArray.push({
                     message: 'exist not valid value',
                     field: 'availableResolutions'

@@ -1,6 +1,6 @@
-import {DBType, ResolutionsEnam, VideoTypes} from '../types/types';
+import {DBType, ResolutionsEnum, VideoType} from '../types/types';
 
-export const video: VideoTypes = {
+export const video: VideoType = {
     id: Date.now() + Math.random(),
     title: 'back',
     author: 'serzh',
@@ -8,7 +8,7 @@ export const video: VideoTypes = {
     minAgeRestriction: null,
     createdAt: new Date(Math.floor(Date.now() / 1000) * 1000).toISOString(),
     publicationDate: new Date(Math.floor((Date.now() + 86400000) / 1000) * 1000).toISOString(),
-    availableResolutions: [ResolutionsEnam.P1440]
+    availableResolutions: [ResolutionsEnum.P1440]
 }
 
 export const db: DBType = {
