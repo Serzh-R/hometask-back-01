@@ -10,7 +10,7 @@ import {
 } from '../validation/fieldValidator';
 import {errorResponse} from '../validation/errorResponse';
 import {HTTP_STATUSES} from '../settings';
-import {CreateVideoInputModel, UpdateVideoInputModel} from '../types/types';
+import {CreateVideoInputModel, UpdateVideoInputModel, VideoType} from '../types/types';
 
 
 export const videoRouter = Router({})
@@ -44,7 +44,7 @@ export const videoController = {
             res.status(HTTP_STATUSES.BAD_REQUEST_400).json(errors_)
             return
         }
-        const newVideo = {
+        const newVideo: VideoType = {
             ...video,
             title,
             author,
@@ -122,7 +122,7 @@ export const videoController = {
         res.status(HTTP_STATUSES.NO_CONTENT_204).send()
     },
 
-    deleteVideo(req: Request, res: Response) {
+    deleteVideoById(req: Request, res: Response) {
 
         const id = +req.params.id;
 
@@ -145,7 +145,7 @@ videoRouter.get('/', videoController.getVideo)
 videoRouter.post('/', videoController.createVideo)
 videoRouter.get('/:id', videoController.getVideoById)
 videoRouter.put('/:id', videoController.updateVideo)
-videoRouter.delete('/:id', videoController.deleteVideo)
+videoRouter.delete('/:id', videoController.deleteVideoById)
 
 
 
